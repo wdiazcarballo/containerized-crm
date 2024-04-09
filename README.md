@@ -16,7 +16,15 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
   git config --global user.email "your_email@example.com"
   ```
   These commands set your name and email address globally for all repositories you work with on your computer. If you want to set the username and email address for just the current repository, remove the --global flag.
-  3.2. Clone the repository to your working directory on the brava machine.
+  3.2. Verify Configuration:
+   To ensure the configuration was successful, you can check the configuration using the following commands:
+   ```
+   git config user.name
+   git config user.email
+   ```
+   After configuring your Git username and email, you should be able to make commits.
+  3.3. Clone the repository to your working directory on the brava machine.
+  
 
 5. **Create a New Node.js Project**: Initialize a new Node.js project with `npm`.
    ```
