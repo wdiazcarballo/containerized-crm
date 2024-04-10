@@ -34,7 +34,7 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
 ### Step 2: Setting Up the CRM Application
 1. **Install Dependencies**: Install the necessary dependencies for the CRM project.
    ```
-   npm install express mongoose 
+   npm install express mongoose bcrypt jsonwebtoken nodemon
    ```
 
 2. **Set Up Project Files**: Create the project files (`crmModel.js`, `crmController.js`, `crmRoutes.js`, `index.js`) based on the provided code.
