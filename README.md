@@ -92,6 +92,36 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
    ```
 
 2. **Push to GitHub**: Push your changes to a GitHub repository for version control and collaboration.
+   You'll need to use a personal access token (PAT) for HTTPS Git operations to allow pushing code to GitHub. Here's a step-by-step guide to help you set this up:
+
+   2.1. **Generate a Personal Access Token (PAT) on GitHub:**
+      - Go to your GitHub account settings.
+      - Click on "Developer settings" in the left sidebar.
+      - Select "Personal access tokens" and then "Generate new token".
+      - Give your token a descriptive name, select the appropriate scopes (at least `repo` for full control of private repositories), and click "Generate token".
+      - **Important:** Copy the token and save it somewhere secure. You won't be able to see it again after you navigate away from the page.
+
+   2.2 **Configure Git to Use the Personal Access Token:**
+      - Open a terminal on your Brava droplet.
+      - Navigate to your repository directory (e.g., `cd wdc-containerized-crm`).
+      - Use the following command to configure Git to use your PAT for authentication:
+        ```bash
+        git config credential.helper store
+        ```
+      - The next time you perform a Git operation that requires authentication (e.g., `git push`), you'll be prompted for your username and password. Enter your GitHub username and use the PAT as the password. Git will store these credentials, so you won't have to enter them again for future operations.
+
+   2.3. **Push Your Changes:**
+      - After setting up the PAT, try pushing your changes again with `git push`.
+      - You should no longer encounter the authentication error.
+
+   2.4. **Best Practices for Git and GitHub Workflow:**
+      - **Commit Often:** Make frequent, small commits to keep a detailed history of your project.
+      - **Use Branches:** Create branches for new features or bug fixes to keep your main branch stable.
+      - **Write Meaningful Commit Messages:** Clearly describe the changes in each commit.
+      - **Pull Before You Push:** Always do a `git pull` before pushing your changes to avoid conflicts.
+      - **Review Changes Before Pushing:** Use `git status` and `git diff` to review your changes before committing and pushing.
+   
+   By following these steps and best practices, you should be able to resolve your authentication issue and have a smoother workflow with Git and GitHub.
 
 ### Conclusion
 By the end of this lab, students will have a basic understanding of implementing AAA security in a Node.js application and dockerizing the application for deployment. They will also gain experience with version control using Git and GitHub.
