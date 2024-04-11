@@ -6,9 +6,9 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
 ### Step 1: Setting Up the Environment
 1. **Log in to the Shared Droplet**: Connect to the shared DigitalOcean droplet named `brava` using SSH.
 
-2. **On GitHub Create a New Repository**: Create a new repo for the CRM project.
+2. **On GitHub Create a New Repository**: Create a new repo for the CRM project named **<your username>-containerized-crm**.
    
-3. **Clone the repository on brava**:
+4. **Clone the repository on brava**:
    3.1. Configure Git with Your Username and Email:
    In the terminal, type the following commands, replacing Your Name and your_email@example.com with your actual name and email address you use for Git:
   ```
@@ -37,17 +37,38 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
    npm install express mongoose bcrypt jsonwebtoken nodemon
    ```
 
-2. **Set Up Project Files**: Create the project files (`crmModel.js`, `crmController.js`, `crmRoutes.js`, `index.js`) based on the provided code.
+2. **Set Up Project Files**:
+   2.1 Create the following files and directory structure
+         <your username>-containerized-crm
+            .
+            ├── **Dockerfile**
+            ├── LICENSE
+            ├── README.md
+            ├── **docker-compose-student-<your number>.yml**
+            ├── **index.js**
+            ├── node_modules
+            ├── package-lock.json
+            ├── package.json
+            ├── public
+            │  └── .
+            └── **src**
+               ├── **controllers**
+               │   ├── **crmController.js**
+               │   └── **userController.js**
+               ├── **models**
+               │   ├── **crmModel.js**
+               │   └── **userModels.js**
+               └── **routes**
+                   ├── **crmRoutes.js**
+                   └── **userRoutes.js**
 
-3. **Add Security Features**:
-   - Implement basic authentication using middleware in `index.js`.
-   - Use environment variables to store sensitive information like database credentials.
+   2.2 Copy the source code to the files.
 
 ### Step 3: Dockerizing the Application
 1. **Create a `Dockerfile`**: Create a `Dockerfile` in the project root with the following content:
    ```Dockerfile
-   FROM node:14
-   WORKDIR /usr/src/app
+   FROM node:latest
+   WORKDIR /app
    COPY package*.json ./
    RUN npm install
    COPY . .
@@ -55,33 +76,38 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
    CMD ["node", "index.js"]
    ```
 
-2. **Introduce Docker Compose**:
-   - Explain the concept of Docker Compose and its advantages.
-   - Create a `docker-compose.yml` file with the following content:
+2. **Create a `docker-compose-student-<your number>.yml`**:
+   - Replace the placeholder <your number> with the number assigned to you in the class, e.g. if you are number 33 the file name will be **`docker-compose-student-33.yml`**.
+   - Create a docker-compose file  with the following content:
      ```yaml
-     version: '3'
-     services:
-       crm_app:
-         build: .
-         ports:
-           - "3000:3000"
-         environment:
-           - DB_URL=mongodb://mongo:27017/CRMdb
-         depends_on:
-           - mongo
-       mongo:
-         image: mongo
-         ports:
-           - "27017:27017"
+      version: '3.8'
+      services:
+        api-student-<your number>:
+          build: .
+          ports:
+            - "<your port number>:3000"
+          environment:
+            DB_URL: mongodb://mongo-student-<your number>:27017/CRMdb-student-<your number>
+            PORT: 3000
+          depends_on:
+            - mongo-student-<your number>
+        mongo-student-<your number>:
+          image: mongo:latest
+          ports:
+            - "<your assigned db port>:27017"
+          volumes:
+            - db-data-student-<your number>:/data/db
+      volumes:
+        db-data-student-<your number>:
      ```
 
-3. **Build and Run the Docker Containers**:
+4. **Build and Run the Docker Containers**:
    ```
-   docker-compose up --build
+   docker-compose -f docker-compose-student-<student_number>.yml up --build
    ```
 
 ### Step 4: Testing the Application
-1. **Access the Application**: Access the CRM application in a web browser at `http://brava:3000`.
+1. **Access the Application**: Access the CRM application in a web browser at `http://152.42.186.38:<your assign server port>`.
 2. **Test the API Endpoints**: Use a tool like Postman to test the CRUD operations on the contacts.
 
 ### Step 5: Pushing Changes to GitHub
