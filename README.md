@@ -38,7 +38,10 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
    ```
 
 2. **Set Up Project Files**:
+   
    2.1 Create the following files and directory structure
+   ### You have to add all files and folder shown in the double asterisks (**).
+   
          <your username>-containerized-crm
             .
             ├── **Dockerfile**
@@ -61,8 +64,7 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
                └── **routes**
                    ├── **crmRoutes.js**
                    └── **userRoutes.js**
-
-   2.2 Copy the source code to the files.
+   2.2 Copy the source code from this repository to the corresponding files.
 
 ### Step 3: Dockerizing the Application
 1. **Create a `Dockerfile`**: Create a `Dockerfile` in the project root with the following content:
@@ -104,6 +106,10 @@ Here's a step-by-step lab handout to guide your students through enhancing the s
 4. **Build and Run the Docker Containers**:
    ```
    docker-compose -f docker-compose-student-<student_number>.yml up --build
+   ```
+5. **Clean up after testing**:
+   ```
+   docker-compose -f docker-compose-student-<student_number>.yml down --rmi all
    ```
 
 ### Step 4: Testing the Application
